@@ -15,6 +15,7 @@ import Auth from "layouts/Auth.js";
 import Landing from "views/Landing.js";
 import Profile from "views/Profile.js";
 import Index from "views/Index.js";
+import TestComponent from "TestComponent";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -23,6 +24,7 @@ ReactDOM.render(
       <Route path="/admin" component={Admin} />
       <Route path="/auth" component={Auth} />
       {/* add routes without layouts */}
+      <Route path="/testing" exact component={TestComponent} />
       <Route path="/landing" exact component={Landing} />
       <Route path="/index" exact component={Index} />
       <Route path="/profile" exact component={Profile} />
@@ -34,4 +36,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// ReactDOM.render(<BooksPreview />, document.getElementById("root"));
+// ReactDOM.render(<TestComponent />, document.getElementById("root"));
