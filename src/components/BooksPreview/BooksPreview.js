@@ -104,17 +104,25 @@ const DUMMY_BOOKLISTS = [
 ];
 
 const BooksPreview = (props) => {
-  const createBookLists = DUMMY_BOOKLISTS.map((book) => (
-    <Book
-      key={Math.random().toString()}
-      title={book.title}
-      author={book.author}
-      bookImg={book.bookImg}
-      //   desciption={book.desciption}
-      score={book.score}
-    />
-  ));
+  const createBookLists = DUMMY_BOOKLISTS.filter((book) => book.score > 4)
+    .slice(0, 6)
+    .sort((a, b) => b.score - a.score)
+    .map((book) => (
+      <Book
+        key={Math.random().toString()}
+        title={book.title}
+        author={book.author}
+        bookImg={book.bookImg}
+        score={book.score}
+      />
+    ));
 
-  return <Fragment>{createBookLists}</Fragment>;
+  return (
+    <Fragment>
+      <div className="container mx-auto px-4">
+        <div className="flex flex-wrap">{createBookLists}</div>
+      </div>
+    </Fragment>
+  );
 };
 export default BooksPreview;

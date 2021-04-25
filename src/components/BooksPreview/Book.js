@@ -7,9 +7,7 @@ const Book = (props) => {
         <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
           <div className="px-4 py-5 flex-auto">
             <div className="text-white text-center inline-flex items-center justify-center w-15 h-15 mb-5 shadow-lg">
-              <a href="javascript:void(0);">
-                <img src={props.bookImg}></img>
-              </a>
+              <img src={props.bookImg} alt="..."></img>
             </div>
             <h6 className="text-xl font-semibold text-center">{props.title}</h6>
             <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold text-center">
