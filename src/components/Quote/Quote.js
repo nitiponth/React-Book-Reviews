@@ -1,4 +1,3 @@
-import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import { useState, useEffect } from "react";
 
 const { Fragment } = require("react");
@@ -23,7 +22,6 @@ const Quote = (props) => {
             <div className="pr-12">
               <h1 className="text-white font-semibold text-4xl">
                 {quote.content}
-                {/* <LoadingSpinner /> */}
               </h1>
               <p className="mt-4 text-lg text-blueGray-200">{quote.author}</p>
             </div>

@@ -22,7 +22,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/" exact component={Landing} />
         <Route path="/landing" exact component={Landing} />
-        <Route path="/profile" exact component={Profile} />
+        <Route path="/profile/:username" component={Profile} />
 
         {/* add redirect for first page */}
         <Redirect from="*" to="/landing" />
