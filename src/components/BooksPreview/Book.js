@@ -9,7 +9,7 @@ const Book = (props) => {
             <div className="text-white text-center inline-flex items-center justify-center w-15 h-15 mb-5 shadow-lg">
               <img src={props.bookImg} alt="..."></img>
             </div>
-            <h6 className="text-xl font-semibold text-center">{props.title}</h6>
+            <h6 className="text-lg font-semibold text-center">{props.title}</h6>
             <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold text-center">
               {props.author}
             </p>

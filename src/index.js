@@ -13,19 +13,21 @@ import Landing from "./Pages/MainPage/Landing";
 import Profile from "./Pages/Profile/Profile";
 // import TestComponent from "TestComponent";
 import Layout from "layouts/Layout";
-import Footer from "./components/Footers/Footer";
+import Footer from "./components/Footers/FooterSmall";
+// import Login from "Pages/AuthPage/Login";
+import Auth from "./Pages/AuthPage/Auth";
 // import Page6 from "components/Page6/page6";
 
 ReactDOM.render(
   <BrowserRouter>
     <Layout>
       <Switch>
+        <Route path="/auth" component={Auth} />
         <Route path="/" exact component={Landing} />
-        <Route path="/landing" exact component={Landing} />
+
         <Route path="/profile/:username" component={Profile} />
 
-        {/* add redirect for first page */}
-        <Redirect from="*" to="/landing" />
+        <Redirect from="*" to="/" />
       </Switch>
     </Layout>
     <Footer />
