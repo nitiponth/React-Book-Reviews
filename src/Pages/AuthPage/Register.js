@@ -67,6 +67,9 @@ const Register = (props) => {
       ? "block uppercase text-red-500 text-xs font-bold mb-2"
       : "block uppercase text-blueGray-600 text-xs font-bold mb-2";
 
+  const formClassName = formIsValid
+    ? "bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+    : "cursor-not-allowed bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150";
   return (
     <Fragment>
       <div className="container mx-auto px-4 h-full">
@@ -198,7 +201,7 @@ const Register = (props) => {
                     >
                       <button
                         disabled={!formIsValid}
-                        className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                        className={formClassName}
                         type="button"
                       >
                         Next

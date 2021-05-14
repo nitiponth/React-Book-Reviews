@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import auth from "../../firebase";
+import { app } from "../../firebase";
 import useInput from "../../hooks/use-input";
 
 const Login = () => {
@@ -29,7 +29,8 @@ const Login = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     console.log("Login!");
-    auth
+    app
+      .auth()
       .signInWithEmailAndPassword(enteredEmail, enteredPassword)
       .then((userCredetial) => {
         console.log(userCredetial.user);
