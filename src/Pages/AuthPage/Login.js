@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { app } from "../../firebase";
+import AuthContext from "../../store/auth-context";
 import useInput from "../../hooks/use-input";
 
 const Login = () => {
@@ -9,6 +10,8 @@ const Login = () => {
 
   const isNotEmpty = (value) => value.trim() !== "";
   const isEmail = (value) => value.includes("@");
+
+  const authCtx = useContext(AuthContext);
 
   const {
     value: enteredEmail,
@@ -28,12 +31,11 @@ const Login = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log("Login!");
     app
       .auth()
       .signInWithEmailAndPassword(enteredEmail, enteredPassword)
       .then((userCredetial) => {
-        console.log(userCredetial.user);
+        authCtx.onLogin(userCredetial.user.displayName);
         history.push("/");
       })
       .catch((error) => {
@@ -62,7 +64,7 @@ const Login = () => {
     <>
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
-          <div className="w-full lg:w-4/12 px-4">
+          <div className="w-full lg:w-6/12 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
@@ -132,18 +134,6 @@ const Login = () => {
                       onBlur={passBlurHandler}
                       placeholder="Password"
                     />
-                  </div>
-                  <div>
-                    <label className="inline-flex items-center cursor-pointer">
-                      <input
-                        id="customCheckLogin"
-                        type="checkbox"
-                        className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                      />
-                      <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                        Remember me
-                      </span>
-                    </label>
                   </div>
 
                   <div className="text-center mt-6">

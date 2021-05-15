@@ -18,20 +18,24 @@ import Footer from "./components/Footers/FooterSmall";
 import Auth from "./Pages/AuthPage/Auth";
 // import Page6 from "components/Page6/page6";
 
+import { AuthContextProvider } from "./store/auth-context";
+
 ReactDOM.render(
-  <BrowserRouter>
-    <Layout>
-      <Switch>
-        <Route path="/auth" component={Auth} />
-        <Route path="/" exact component={Landing} />
+  <AuthContextProvider>
+    <BrowserRouter>
+      <Layout>
+        <Switch>
+          <Route path="/auth" component={Auth} />
+          <Route path="/" exact component={Landing} />
 
-        <Route path="/profile/:username" component={Profile} />
+          <Route path="/profile/:username" component={Profile} />
 
-        <Redirect from="*" to="/" />
-      </Switch>
-    </Layout>
-    <Footer />
-  </BrowserRouter>,
+          <Redirect from="*" to="/" />
+        </Switch>
+      </Layout>
+      <Footer />
+    </BrowserRouter>
+  </AuthContextProvider>,
   document.getElementById("root")
 );
 
