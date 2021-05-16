@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 
@@ -8,6 +8,7 @@ import AuthContext from "../../store/auth-context";
 import PagesDropdown from "components/Dropdowns/PagesDropdown.js";
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
+import Modal from "components/Modal/Modal";
 
 const Navbar = (props) => {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -32,6 +33,7 @@ const Navbar = (props) => {
               <i className="text-white fas fa-bars"></i>
             </button>
           </div>
+
           <div
             className={
               "lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none" +
@@ -39,16 +41,19 @@ const Navbar = (props) => {
             }
             id="example-navbar-warning"
           >
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="flex items-center">
-                <PagesDropdown />
-              </li>
-
-              <li className="flex items-center">
-                {!ctx.isLoggedIn && <LoginButton />}
-                {ctx.isLoggedIn && <LogoutButton />}
-              </li>
-            </ul>
+            {navbarOpen && (
+              <Modal onClose={() => setNavbarOpen(false)}>
+                <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+                  <li className="flex items-center">
+                    <PagesDropdown />
+                  </li>
+                  <li className="flex items-center">
+                    {!ctx.isLoggedIn && <LoginButton />}
+                    {ctx.isLoggedIn && <LogoutButton />}
+                  </li>
+                </ul>
+              </Modal>
+            )}
           </div>
         </div>
       </nav>
