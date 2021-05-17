@@ -19,6 +19,7 @@ import Auth from "./Pages/AuthPage/Auth";
 import AddBook from "./Pages/AddBookPage/AddBook";
 
 import { AuthContextProvider } from "./store/auth-context";
+import BookDetail from "Pages/BookDetailPage/BookDetail";
 
 ReactDOM.render(
   <AuthContextProvider>
@@ -29,6 +30,7 @@ ReactDOM.render(
           <Route path="/" exact component={Landing} />
 
           <Route path="/profile/:username" component={Profile} />
+          <Route path="/book/:bookId" component={BookDetail} />
           <Route path="/addingBook" component={AddBook} />
 
           <Redirect from="*" to="/" />

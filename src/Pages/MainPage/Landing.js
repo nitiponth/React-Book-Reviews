@@ -1,7 +1,7 @@
 import React from "react";
 
 // components
-import BooksPreview from "components/BooksPreview/BooksPreview";
+import BooksPreview from "./Components/BookPreview/BooksPreview";
 import QuoteSection from "./Components/QuoteSection/QuoteSection";
 import Authors from "../MainPage/Components/Popular_Author/Authors";
 
@@ -14,9 +14,9 @@ export default function Landing() {
           <BooksPreview />
         </section>
 
-        <section className="pt-20 pb-48">
+        {/* <section className="pt-20 pb-48">
           <Authors />
-        </section>
+        </section> */}
       </main>
     </>
   );

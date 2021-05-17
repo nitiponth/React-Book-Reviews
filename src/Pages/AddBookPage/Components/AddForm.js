@@ -19,7 +19,7 @@ const AddFrom = () => {
     if (status === "completed") {
       history.push("/");
     }
-  }, [status]);
+  }, [status, history]);
 
   const { value: enteredGenres, valueChangeHandler: genresChangeHandler } =
     useInput(() => {});
@@ -65,9 +65,9 @@ const AddFrom = () => {
       pages: enteredPages,
       publish: enteredPublish,
       link: bookImage,
+      score: 0,
     };
 
-    console.log(bookData.bookid);
     sendRequest(bookData);
   };
   return (

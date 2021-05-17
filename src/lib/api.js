@@ -41,9 +41,8 @@ export async function addUser(userData) {
 }
 
 export async function addBook(bookData) {
-  console.log(bookData.bookId);
   const response = await fetch(
-    `${FIREBASE_DOMAIN}/Book/${bookData.bookId}.json`,
+    `${FIREBASE_DOMAIN}/Books/${bookData.bookId}.json`,
     {
       method: "PUT",
       body: JSON.stringify(bookData),
@@ -85,4 +84,42 @@ export async function getProfile(username) {
   };
 
   return loadedQuote;
+}
+
+export async function getAllBooks() {
+  const response = await fetch(`${FIREBASE_DOMAIN}/Books.json`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not fetch books.");
+  }
+
+  const transformedBooks = [];
+
+  for (const key in data) {
+    const bookObj = {
+      id: key,
+      ...data[key],
+    };
+
+    transformedBooks.push(bookObj);
+  }
+
+  return transformedBooks;
+}
+
+export async function getSingleBook(bookId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/Books/${bookId}.json`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not fetch quote.");
+  }
+
+  const loadedBook = {
+    id: bookId,
+    ...data,
+  };
+
+  return loadedBook;
 }
