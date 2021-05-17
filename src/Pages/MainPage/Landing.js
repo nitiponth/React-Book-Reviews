@@ -3,7 +3,7 @@ import React from "react";
 // components
 import BooksPreview from "./Components/BookPreview/BooksPreview";
 import QuoteSection from "./Components/QuoteSection/QuoteSection";
-import Authors from "../MainPage/Components/Popular_Author/Authors";
+// import Authors from "../MainPage/Components/Popular_Author/Authors";
 
 export default function Landing() {
   return (

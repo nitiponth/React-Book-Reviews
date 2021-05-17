@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from "react";
-import { useParams, Route, Link, useRouteMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import useHttp from "../../hooks/use-http";
 import { getSingleBook } from "../../lib/api";

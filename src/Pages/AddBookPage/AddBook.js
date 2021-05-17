@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import AddFrom from "./Components/AddForm";
+import AuthContext from "../../store/auth-context";
 
 export default function Addbook() {
+  const ctx = useContext(AuthContext);
+  const history = useHistory();
+
+  if (ctx.currentUser !== "admin") {
+    history.push("/");
+  }
   return (
     <>
       <section className="relative block h-500-px">

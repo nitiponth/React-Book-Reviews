@@ -17,6 +17,7 @@ const Profile = (props) => {
 
   const { username } = params;
   const isAdminProfile = ctx.currentUser === "admin";
+  const isOwnProfile = ctx.currentUser === username;
 
   const {
     sendRequest,
@@ -99,6 +100,7 @@ const Profile = (props) => {
                 <ProfileDetail
                   profile={loadedProfile}
                   adminProfile={isAdminProfile}
+                  ownProfile={isOwnProfile}
                 />
               ) : (
                 content

@@ -34,7 +34,7 @@ const BooksPreview = (props) => {
     return <p className="centered focused"> No books found</p>;
   }
 
-  console.log(loadedBook[0].bookId);
+  // console.log(loadedBook[0].bookId);
 
   const createBookLists = loadedBook
     // .filter((book) => book.score > 4)

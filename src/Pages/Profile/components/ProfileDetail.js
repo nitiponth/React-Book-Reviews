@@ -17,9 +17,11 @@ const ProfileDetail = (props) => {
     }
   }, [status, history]);
 
-  console.log("ProfileDetial.js" + props.profile);
   const deleteUserHandler = (props) => {
     sendRequest(username);
+  };
+  const editUserHandler = (props) => {
+    history.push(`/edit/${username}`);
   };
 
   return (
@@ -43,6 +45,17 @@ const ProfileDetail = (props) => {
                 onClick={deleteUserHandler}
               >
                 DELETE
+              </button>
+            </div>
+          )}
+          {props.ownProfile && (
+            <div className="py-6 px-3 mt-32 sm:mt-0">
+              <button
+                className="bg-yellow-500 active:bg-lightBlue-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                onClick={editUserHandler}
+              >
+                EDIT
               </button>
             </div>
           )}
