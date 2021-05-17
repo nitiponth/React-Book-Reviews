@@ -11,7 +11,7 @@ import LogoutButton from "./components/LogoutButton";
 import Modal from "components/Modal/Modal";
 
 const Navbar = (props) => {
-  const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false);
   const ctx = useContext(AuthContext);
 
   return (
@@ -39,21 +39,19 @@ const Navbar = (props) => {
               "lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none" +
               (navbarOpen ? " block rounded shadow-lg" : " hidden")
             }
-            id="example-navbar-warning"
           >
-            {navbarOpen && (
-              <Modal onClose={() => setNavbarOpen(false)}>
-                <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-                  <li className="flex items-center">
-                    <PagesDropdown />
-                  </li>
-                  <li className="flex items-center">
-                    {!ctx.isLoggedIn && <LoginButton />}
-                    {ctx.isLoggedIn && <LogoutButton />}
-                  </li>
-                </ul>
-              </Modal>
-            )}
+            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+              <li className="flex items-center">
+                <PagesDropdown
+                  open={navbarOpen}
+                  onClose={() => setNavbarOpen(!navbarOpen)}
+                />
+              </li>
+              <li className="flex items-center">
+                {!ctx.isLoggedIn && <LoginButton />}
+                {ctx.isLoggedIn && <LogoutButton />}
+              </li>
+            </ul>
           </div>
         </div>
       </nav>

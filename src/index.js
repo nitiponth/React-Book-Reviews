@@ -16,7 +16,7 @@ import Layout from "layouts/Layout";
 import Footer from "./components/Footers/FooterSmall";
 // import Login from "Pages/AuthPage/Login";
 import Auth from "./Pages/AuthPage/Auth";
-// import Page6 from "components/Page6/page6";
+import AddBook from "./Pages/AddBookPage/AddBook";
 
 import { AuthContextProvider } from "./store/auth-context";
 
@@ -29,6 +29,7 @@ ReactDOM.render(
           <Route path="/" exact component={Landing} />
 
           <Route path="/profile/:username" component={Profile} />
+          <Route path="/addingBook" component={AddBook} />
 
           <Redirect from="*" to="/" />
         </Switch>

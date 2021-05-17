@@ -5,6 +5,7 @@ import { createPopper } from "@popperjs/core";
 import AuthContext from "../../store/auth-context";
 import AuthLayout from "./components/AuthLayout";
 import ProfileLayout from "./components/ProfileLayout";
+import AdminLayout from "./components/AdminLayout";
 
 const PagesDropdown = () => {
   // dropdown props
@@ -81,12 +82,7 @@ const PagesDropdown = () => {
         >
           Poetry
         </Link>
-        <Link
-          to="/profile"
-          className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-        >
-          All Genres
-        </Link>
+        {ctx.currentUser === "admin" && <AdminLayout />}
         {!ctx.isLoggedIn && <AuthLayout />}
         {ctx.isLoggedIn && <ProfileLayout currentUser={ctx.currentUser} />}
       </div>
