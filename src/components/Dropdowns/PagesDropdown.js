@@ -53,34 +53,34 @@ const PagesDropdown = () => {
           Genres
         </span>
         <Link
-          to="/landing"
+          to="/genre/biography"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Biography
         </Link>
         <Link
-          to="/profile"
+          to="/genre/business"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Business
         </Link>
         <Link
-          to="/profile"
+          to="/genre/history"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           History
         </Link>
         <Link
-          to="/profile"
+          to="/genre/nonfiction"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Nonfiction
         </Link>
         <Link
-          to="/profile"
+          to="/genre/fiction"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
-          Poetry
+          Fiction
         </Link>
         {ctx.currentUser === "admin" && <AdminLayout />}
         {!ctx.isLoggedIn && <AuthLayout />}

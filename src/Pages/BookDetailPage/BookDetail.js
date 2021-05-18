@@ -85,7 +85,10 @@ const BookDetail = (props) => {
               <Detail book={loadedBook} />
             </div>
           </div>
-          <div className="container mx-auto px-4" style={{ width: "80%" }}>
+          <div
+            className="container mx-auto px-4"
+            style={{ width: "80%", marginBottom: "18rem" }}
+          >
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg">
               <Comments isbn={bookId} />
               <AddComment isbn={bookId} />

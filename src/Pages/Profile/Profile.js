@@ -6,7 +6,6 @@ import { getProfile } from "../../lib/api";
 import AuthContext from "../../store/auth-context";
 
 import ProfileDetail from "./components/ProfileDetail";
-import BooksList from "./components/BooksList";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 import classes from "./Profile.module.css";
@@ -92,7 +91,10 @@ const Profile = (props) => {
             </svg>
           </div>
         </section>
-        <section className="relative py-16 bg-blueGray-200">
+        <section
+          className="relative py-16 bg-blueGray-200"
+          style={{ marginBottom: "54.95rem" }}
+        >
           <div className="container mx-auto px-4">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
               <div className="px-6"></div>
@@ -105,8 +107,8 @@ const Profile = (props) => {
               ) : (
                 content
               )}
-              <div className="mt-10 py-10 border-t border-blueGray-200">
-                <h3
+              <div className="mt-10 py-10">
+                {/* <h3
                   className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2"
                   style={{ marginLeft: "2rem" }}
                 >
@@ -119,7 +121,7 @@ const Profile = (props) => {
                   ) : (
                     <div style={{ height: "60.1vh" }}></div>
                   )}
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

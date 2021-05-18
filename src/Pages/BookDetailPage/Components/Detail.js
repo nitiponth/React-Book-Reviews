@@ -26,6 +26,11 @@ const Detail = (props) => {
     window.confirm("Are you sure you wish to delete this book?") &&
       sendRequest(props.book.bookId);
   };
+
+  // const submitHandler = (event) => {
+  //   event.preventDefault();
+  //   console.log("123");
+  // };
   return (
     <Fragment>
       <div className="flex flex-wrap justify-center">
@@ -57,14 +62,38 @@ const Detail = (props) => {
               </button>
             </div>
           )}
+          {/* <form onSubmit={submitHandler}>
+            <div className="py-6 mx-auto mt-32 sm:mt-0 ">
+              <input
+                // value={enteredScore}
+                type="number"
+                maxLength="1"
+                min="1"
+                max="5"
+                className="placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow mr-2 text-center"
+                style={{ width: "80px" }}
+                placeholder="Score"
+                // onChange={scoreChangeHandler}
+              />
+              <button
+                className="input-group-text fas fa-star mx-auto"
+                id="basic-addon1"
+                style={{ color: "salmon" }}
+                type="submit"
+              >
+                {" "}
+                Rate
+              </button>
+            </div>
+          </form> */}
         </div>
         <div className="w-full lg:w-4/12 px-4 lg:order-1">
-          <div className="flex justify-center py-4 lg:pt-4 pt-8">
+          <div className="flex justify-center py-10 lg:pt-4 pt-8">
             <div className="mr-4 p-3 text-center">
-              <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+              {/* <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
                 {props.book.score}
               </span>
-              <span className="text-sm text-blueGray-400">Book Score</span>
+              <span className="text-sm text-blueGray-400">Book Score</span> */}
             </div>
           </div>
         </div>

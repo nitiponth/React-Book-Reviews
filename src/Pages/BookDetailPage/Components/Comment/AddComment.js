@@ -37,7 +37,6 @@ const AddComment = (props) => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    //console.log(enteredBookid,enteredgenres,enteredDescription,enteredPages)
     await sendRequest({
       commentDetails: {
         username: ctx.currentUser,

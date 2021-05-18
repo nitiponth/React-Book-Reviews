@@ -38,7 +38,7 @@ const BooksPreview = (props) => {
 
   const createBookLists = loadedBook
     // .filter((book) => book.score > 4)
-    .slice(0, 6)
+    .slice(0, 9)
     .sort((a, b) => b.score - a.score)
     .map((book) => (
       <Book
