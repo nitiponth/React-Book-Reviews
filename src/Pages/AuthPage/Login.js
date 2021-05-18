@@ -36,10 +36,12 @@ const Login = () => {
       .signInWithEmailAndPassword(enteredEmail, enteredPassword)
       .then((userCredetial) => {
         authCtx.onLogin(userCredetial.user.displayName);
+        alert(`May the books be with you - ${userCredetial.user.displayName}`);
         history.push("/");
       })
       .catch((error) => {
         console.log(error.message);
+        alert("Email or password is incorrect");
       });
   };
 

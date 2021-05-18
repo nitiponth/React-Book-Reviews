@@ -67,7 +67,6 @@ const RegisterDetails = (props) => {
         .auth()
         .createUserWithEmailAndPassword(email, pass)
         .then(async (userCredential) => {
-          console.log("Successfully created new user:");
           await userCredential.user.updateProfile({
             displayName: user,
             photoURL: profile,
@@ -83,6 +82,7 @@ const RegisterDetails = (props) => {
             uid: userCredential.user.uid,
           };
           sendRequest(userData);
+          alert("Successfully created new user");
         })
         .catch((error) => {
           var errorCode = error.code;

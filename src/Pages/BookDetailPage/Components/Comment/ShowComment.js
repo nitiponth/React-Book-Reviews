@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 const ShowComment = (props) => {
   return (
     <>
@@ -10,7 +11,7 @@ const ShowComment = (props) => {
           <div className="flex flex-wrap">
             <div className="py-6 mt-32 sm:mt-0">
               <div className=" font-bold">
-                {props.user}
+                <Link to={`/profile/${props.user}`}>{props.user}</Link>
                 {" : "}
                 <span className="text-base font-bold tracking-wide text-blueGray-600 ml-1">
                   {props.score}

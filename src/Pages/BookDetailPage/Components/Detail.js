@@ -1,5 +1,5 @@
 import { Fragment, useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Detail.css";
 
 import AuthContext from "../../../store/auth-context";
@@ -106,7 +106,7 @@ const Detail = (props) => {
           {props.book.author}
         </div>
         <div className="text-base leading-normal mt-0 mb-2 text-blueGray-500">
-          {props.book.genres}
+          <Link to={`/genre/${props.book.genres}`}>{props.book.genres}</Link>
         </div>
         <div className="flex flex-wrap justify-center">
           <div className="mt-10 py-10 border-t border-blueGray-200">

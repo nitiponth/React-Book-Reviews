@@ -53,31 +53,31 @@ const PagesDropdown = () => {
           Genres
         </span>
         <Link
-          to="/genre/biography"
+          to="/genre/Biography"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Biography
         </Link>
         <Link
-          to="/genre/business"
+          to="/genre/Business"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Business
         </Link>
         <Link
-          to="/genre/history"
+          to="/genre/History"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           History
         </Link>
         <Link
-          to="/genre/nonfiction"
+          to="/genre/Nonfiction"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Nonfiction
         </Link>
         <Link
-          to="/genre/fiction"
+          to="/genre/Fiction"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Fiction
