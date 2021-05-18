@@ -1,13 +1,18 @@
 import React, { Fragment, useState, useEffect } from "react";
 
-import { useHistory } from "react-router-dom";
-import useInput from "../../../hooks/use-input";
-import useHttp from "../../../hooks/use-http";
-import { addBook } from "../../../lib/api";
-import UploadBookButton from "./UploadBookButton";
+import { useHistory, useParams } from "react-router-dom";
+import useInput from "../../../../hooks/use-input";
+import useHttp from "../../../../hooks/use-http";
+import { editBook } from "../../../../lib/api";
+import { getSingleBook } from "../../../../lib/api";
+import UploadBookButton from "../../../AddBookPage/Components/UploadBookButton";
 
 const AddFrom = () => {
-  const { sendRequest, status } = useHttp(addBook);
+  const params = useParams();
+  const { isbn } = params;
+
+  const { sendRequest: updateBook, status: updateBookStatus } =
+    useHttp(editBook);
 
   const history = useHistory();
 
@@ -15,9 +20,23 @@ const AddFrom = () => {
     "https://firebasestorage.googleapis.com/v0/b/arn-rai-dee.appspot.com/o/book_img%2Fbook.jpg?alt=media&token=a10fcc24-fc0a-4e7e-96ae-f8cada52f055"
   );
 
+  const {
+    sendRequest,
+    status,
+    data: loadedBook,
+    error,
+  } = useHttp(getSingleBook, true);
+
+  const [bookData, setBookData] = useState("");
+
+  useEffect(() => {
+    sendRequest(isbn);
+  }, [sendRequest, isbn]);
+
   useEffect(() => {
     if (status === "completed") {
-      history.push(`/book/${enteredBookId}`);
+      setBookImage(loadedBook.link);
+      setBookData(loadedBook);
     }
   }, [status, history]);
 
@@ -44,31 +63,27 @@ const AddFrom = () => {
   const { value: enteredPublish, valueChangeHandler: publishChangeHandler } =
     useInput(() => {});
 
-  let formIsValid = true;
-
-  const formClassName = formIsValid
-    ? "bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-    : "cursor-not-allowed bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150";
-
   const imgUploadHandler = (img) => {
     setBookImage(img);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
+    console.log("go");
     const bookData = {
-      genres: enteredGenres,
-      title: enteredTitle,
-      bookId: enteredBookId,
-      author: enteredAuthor,
-      description: enteredDescription,
-      pages: enteredPages,
-      publish: enteredPublish,
+      genres: enteredGenres || loadedBook.genres,
+      title: enteredTitle || loadedBook.title,
+      bookId: enteredBookId || loadedBook.bookId,
+      author: enteredAuthor || loadedBook.author,
+      description: enteredDescription || loadedBook.description,
+      pages: enteredPages || loadedBook.pages,
+      publish: enteredPublish || loadedBook.publish,
       link: bookImage,
       score: 0,
     };
 
-    sendRequest(bookData);
+    await updateBook(bookData);
+    history.push(`/book/${isbn}`);
   };
   return (
     <Fragment>
@@ -95,7 +110,7 @@ const AddFrom = () => {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={genresChangeHandler}
-                      placeholder="genres"
+                      placeholder={bookData.genres}
                     />
                   </div>
                   <br></br>
@@ -106,7 +121,7 @@ const AddFrom = () => {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={titleChangeHandler}
-                      placeholder="Title"
+                      placeholder={bookData.title}
                     />
                   </div>
                   <br></br>
@@ -118,7 +133,7 @@ const AddFrom = () => {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={bookidChangeHandler}
-                      placeholder="isbn"
+                      placeholder={bookData.bookId}
                     />
                   </div>
                   <br></br>
@@ -130,7 +145,7 @@ const AddFrom = () => {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={authorChangeHandler}
-                      placeholder="Author"
+                      placeholder={bookData.author}
                     />
                   </div>
                   <br></br>
@@ -140,10 +155,10 @@ const AddFrom = () => {
                       id="Description"
                       value={enteredDescription}
                       type="text"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 row-5"
+                      className="border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 row-5"
                       style={{ height: "150px" }}
                       onChange={descriptionChangeHandler}
-                      placeholder="Description"
+                      placeholder={bookData.description}
                     ></textarea>
                   </div>
 
@@ -156,7 +171,7 @@ const AddFrom = () => {
                       type="number"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={pagesChangeHandler}
-                      placeholder="Pages"
+                      placeholder={bookData.pages}
                     />
                   </div>
                   <br></br>
@@ -168,7 +183,7 @@ const AddFrom = () => {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={publishChangeHandler}
-                      placeholder="Publish"
+                      placeholder={bookData.publish}
                     />
                   </div>
                   <br></br>
@@ -176,11 +191,10 @@ const AddFrom = () => {
                   <div className="text-center ">
                     <button
                       id="show-info"
-                      className={formClassName}
+                      className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
-                      disabled={!formIsValid}
                     >
-                      Submit
+                      Update
                     </button>
                   </div>
                 </form>

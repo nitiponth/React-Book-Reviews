@@ -1,8 +1,31 @@
-import { Fragment } from "react";
-// import { Link } from "react-router-dom";
+import { Fragment, useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "./Detail.css";
 
+import AuthContext from "../../../store/auth-context";
+
+import useHttp from "../../../hooks/use-http";
+import { deleteBook } from "../../../lib/api";
+
 const Detail = (props) => {
+  const { sendRequest, status } = useHttp(deleteBook);
+  const ctx = useContext(AuthContext);
+  const history = useHistory();
+  const isAdminProfile = ctx.currentUser === "admin";
+
+  useEffect(() => {
+    if (status === "completed") {
+      history.push("/");
+    }
+  }, [status, history]);
+
+  const editBookHandler = () => {
+    history.push(`/editBook/${props.book.bookId}`);
+  };
+  const deleteBookHandler = () => {
+    window.confirm("Are you sure you wish to delete this book?") &&
+      sendRequest(props.book.bookId);
+  };
   return (
     <Fragment>
       <div className="flex flex-wrap justify-center">
@@ -16,14 +39,24 @@ const Detail = (props) => {
           </div>
         </div>
         <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-          <div className="py-6 px-3 mt-32 sm:mt-0">
-            <button
-              className="bg-red-500 active:bg-lightBlue-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
-              type="button"
-            >
-              Rate it
-            </button>
-          </div>
+          {isAdminProfile && (
+            <div className="py-6 px-3 mt-32 sm:mt-0">
+              <button
+                className="bg-yellow-500 active:bg-lightBlue-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                onClick={editBookHandler}
+              >
+                EDIT
+              </button>
+              <button
+                className="bg-red-500 active:bg-lightBlue-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                onClick={deleteBookHandler}
+              >
+                DELETE
+              </button>
+            </div>
+          )}
         </div>
         <div className="w-full lg:w-4/12 px-4 lg:order-1">
           <div className="flex justify-center py-4 lg:pt-4 pt-8">
@@ -43,11 +76,14 @@ const Detail = (props) => {
         <div className="text-xl leading-normal mt-0 mb-2 text-blueGray-500 font-bold">
           {props.book.author}
         </div>
+        <div className="text-base leading-normal mt-0 mb-2 text-blueGray-500">
+          {props.book.genres}
+        </div>
         <div className="flex flex-wrap justify-center">
           <div className="mt-10 py-10 border-t border-blueGray-200">
             <p
               className="mb-4 text-lg leading-relaxed text-blueGray-700 break-words"
-              style={{ paddingLeft: "10rem", paddingRight: "10rem" }}
+              style={{ paddingLeft: "5rem", paddingRight: "5rem" }}
             >
               {props.book.description}
             </p>

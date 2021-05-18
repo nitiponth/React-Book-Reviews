@@ -1,16 +1,17 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
-import AddFrom from "./Components/AddForm";
-import AuthContext from "../../store/auth-context";
+import EditFrom from "./EditForm";
+import AuthContext from "../../../../store/auth-context";
 
-export default function Addbook() {
+const EditBook = () => {
   const ctx = useContext(AuthContext);
   const history = useHistory();
 
-  if (ctx.currentUser.toString() !== "admin") {
-    history.push("/");
+  if (ctx.currentUser !== "admin") {
+    console.log("get out!");
   }
+
   return (
     <>
       <section className="relative block h-500-px">
@@ -30,7 +31,7 @@ export default function Addbook() {
           <div className="items-center flex flex-wrap">
             <div className="w-full lg:w-10/12 px-4 ml-auto mr-auto text-center">
               <h1 className="text-white font-semibold text-4xl pt-32">
-                What about this Book?
+                Has anything changed?
               </h1>
             </div>
           </div>
@@ -61,10 +62,12 @@ export default function Addbook() {
           style={{ marginBottom: "9.75rem" }}
         >
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg -mt-64">
-            <AddFrom />
+            <EditFrom />
           </div>
         </div>
       </section>
     </>
   );
-}
+};
+
+export default EditBook;

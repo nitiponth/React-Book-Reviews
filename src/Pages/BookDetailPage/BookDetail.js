@@ -7,12 +7,13 @@ import { getSingleBook } from "../../lib/api";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import Detail from "./Components/Detail";
 
+import AddComment from "./Components/Comment/AddComment";
+import Comments from "./Components/Comment/Comments";
+
 const BookDetail = (props) => {
   const params = useParams();
 
   const { bookId } = params;
-
-  console.log(bookId);
 
   const {
     sendRequest,
@@ -20,8 +21,6 @@ const BookDetail = (props) => {
     data: loadedBook,
     error,
   } = useHttp(getSingleBook, true);
-
-  console.log(loadedBook);
 
   useEffect(() => {
     sendRequest(bookId);
@@ -84,6 +83,12 @@ const BookDetail = (props) => {
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
               <div className="px-6"></div>
               <Detail book={loadedBook} />
+            </div>
+          </div>
+          <div className="container mx-auto px-4" style={{ width: "80%" }}>
+            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg">
+              <Comments isbn={bookId} />
+              <AddComment isbn={bookId} />
             </div>
           </div>
         </section>

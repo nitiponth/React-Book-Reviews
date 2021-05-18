@@ -74,8 +74,38 @@ export async function addBook(bookData) {
   return null;
 }
 
+export async function editBook(bookData) {
+  const response = await fetch(
+    `${FIREBASE_DOMAIN}/Books/${bookData.bookId}.json`,
+    {
+      method: "PUT",
+      body: JSON.stringify(bookData),
+    }
+  );
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not create user.");
+  }
+
+  return null;
+}
+
 export async function deleteUser(userData) {
   const response = await fetch(`${FIREBASE_DOMAIN}/users/${userData}.json`, {
+    method: "DELETE",
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not create user.");
+  }
+
+  return null;
+}
+
+export async function deleteBook(bookId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/Books/${bookId}.json`, {
     method: "DELETE",
   });
   const data = await response.json();
@@ -139,4 +169,49 @@ export async function getSingleBook(bookId) {
   };
 
   return loadedBook;
+}
+
+export async function addComment(commentData) {
+  const response = await fetch(
+    `${FIREBASE_DOMAIN}/comments/${commentData.bookId}.json`,
+    {
+      method: "POST",
+      body: JSON.stringify(commentData.commentDetails),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not add comment.");
+  }
+
+  return { commentId: data.username };
+}
+
+export async function getAllComments(bookId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/comments/${bookId}.json`);
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not get comments.");
+  }
+
+  const transformedComments = [];
+
+  for (const key in data) {
+    const commentObj = {
+      id: key,
+      ...data[key],
+    };
+    console.log(commentObj);
+
+    transformedComments.push(commentObj);
+  }
+
+  console.log(transformedComments);
+  return transformedComments;
 }

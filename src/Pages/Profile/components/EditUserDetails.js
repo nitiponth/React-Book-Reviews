@@ -16,7 +16,7 @@ const EditUserDetails = (props) => {
   const history = useHistory();
   const { username } = params;
 
-  if (ctx.currentUser !== username) {
+  if (ctx.currentUser !== "admin") {
     history.push("/");
   }
 

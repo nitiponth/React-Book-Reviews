@@ -18,7 +18,8 @@ const ProfileDetail = (props) => {
   }, [status, history]);
 
   const deleteUserHandler = (props) => {
-    sendRequest(username);
+    window.confirm("Are you sure you wish to delete this user?") &&
+      sendRequest(username);
   };
   const editUserHandler = (props) => {
     history.push(`/edit/${username}`);
