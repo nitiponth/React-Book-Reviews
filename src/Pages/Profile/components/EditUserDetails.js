@@ -16,7 +16,7 @@ const EditUserDetails = (props) => {
   const history = useHistory();
   const { username } = params;
 
-  if (ctx.currentUser !== "admin") {
+  if (ctx.currentUser !== username) {
     history.push("/");
   }
 
@@ -51,7 +51,7 @@ const EditUserDetails = (props) => {
     if (updateStatus === "completed") {
       history.push(`/profile/${loadedProfile.username}`);
     }
-  }, [updateStatus, history]);
+  }, [updateStatus, history, loadedProfile]);
 
   const { value: enteredName, valueChangeHandler: nameChangeHandler } =
     useInput(() => {});

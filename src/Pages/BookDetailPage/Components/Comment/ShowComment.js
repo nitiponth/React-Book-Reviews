@@ -17,9 +17,8 @@ const ShowComment = (props) => {
                   {props.score}
                 </span>
                 <span
-                  className="input-group-text"
                   id="basic-addon1"
-                  className="fas fa-star ml-2"
+                  className="input-group-text fas fa-star ml-2"
                   style={{ color: "salmon" }}
                 ></span>
               </div>

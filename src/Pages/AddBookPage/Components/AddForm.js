@@ -9,34 +9,43 @@ import UploadBookButton from "./UploadBookButton";
 const AddFrom = () => {
   const { sendRequest, status } = useHttp(addBook);
 
+  const isNotEmpty = (value) => value.trim() !== "";
+
   const history = useHistory();
 
   const [bookImage, setBookImage] = useState(
     "https://firebasestorage.googleapis.com/v0/b/arn-rai-dee.appspot.com/o/book_img%2Fbook.jpg?alt=media&token=a10fcc24-fc0a-4e7e-96ae-f8cada52f055"
   );
 
-  useEffect(() => {
-    if (status === "completed") {
-      history.push(`/book/${enteredBookId}`);
-    }
-  }, [status, history]);
+  const {
+    value: enteredGenres,
+    valueChangeHandler: genresChangeHandler,
+    isValid: enteredGenresValid,
+  } = useInput(isNotEmpty);
 
-  const { value: enteredGenres, valueChangeHandler: genresChangeHandler } =
-    useInput(() => {});
+  const {
+    value: enteredTitle,
+    valueChangeHandler: titleChangeHandler,
+    isValid: titleValid,
+  } = useInput(isNotEmpty);
 
-  const { value: enteredTitle, valueChangeHandler: titleChangeHandler } =
-    useInput(() => {});
+  const {
+    value: enteredBookId,
+    valueChangeHandler: bookidChangeHandler,
+    isValid: bookIdValid,
+  } = useInput(isNotEmpty);
 
-  const { value: enteredBookId, valueChangeHandler: bookidChangeHandler } =
-    useInput(() => {});
-
-  const { value: enteredAuthor, valueChangeHandler: authorChangeHandler } =
-    useInput(() => {});
+  const {
+    value: enteredAuthor,
+    valueChangeHandler: authorChangeHandler,
+    isValid: authorValid,
+  } = useInput(isNotEmpty);
 
   const {
     value: enteredDescription,
     valueChangeHandler: descriptionChangeHandler,
-  } = useInput(() => {});
+    isValid: descriptionValid,
+  } = useInput(isNotEmpty);
 
   const { value: enteredPages, valueChangeHandler: pagesChangeHandler } =
     useInput(() => {});
@@ -44,12 +53,27 @@ const AddFrom = () => {
   const { value: enteredPublish, valueChangeHandler: publishChangeHandler } =
     useInput(() => {});
 
-  let formIsValid = true;
+  useEffect(() => {
+    if (status === "completed") {
+      history.push(`/book/${enteredBookId}`);
+    }
+  }, [status, history, enteredBookId]);
+
+  let formIsValid = false;
+
+  if (
+    enteredGenresValid &&
+    titleValid &&
+    bookIdValid &&
+    authorValid &&
+    descriptionValid
+  ) {
+    formIsValid = true;
+  }
 
   const formClassName = formIsValid
     ? "bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
     : "cursor-not-allowed bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150";
-
   const imgUploadHandler = (img) => {
     setBookImage(img);
   };

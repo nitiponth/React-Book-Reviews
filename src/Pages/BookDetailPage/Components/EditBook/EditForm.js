@@ -11,8 +11,7 @@ const AddFrom = () => {
   const params = useParams();
   const { isbn } = params;
 
-  const { sendRequest: updateBook, status: updateBookStatus } =
-    useHttp(editBook);
+  const { sendRequest: updateBook } = useHttp(editBook);
 
   const history = useHistory();
 
@@ -24,7 +23,6 @@ const AddFrom = () => {
     sendRequest,
     status,
     data: loadedBook,
-    error,
   } = useHttp(getSingleBook, true);
 
   const [bookData, setBookData] = useState("");
@@ -38,7 +36,7 @@ const AddFrom = () => {
       setBookImage(loadedBook.link);
       setBookData(loadedBook);
     }
-  }, [status, history]);
+  }, [status, history, loadedBook]);
 
   const { value: enteredGenres, valueChangeHandler: genresChangeHandler } =
     useInput(() => {});
