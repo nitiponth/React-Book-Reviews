@@ -95,7 +95,7 @@ const AddFrom = () => {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={genresChangeHandler}
-                      placeholder="genres"
+                      placeholder="Genre (Example: Fiction)"
                     />
                   </div>
                   <br></br>
@@ -106,7 +106,7 @@ const AddFrom = () => {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={titleChangeHandler}
-                      placeholder="Title"
+                      placeholder="Title (Example: The Alchemist)"
                     />
                   </div>
                   <br></br>
@@ -118,7 +118,7 @@ const AddFrom = () => {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={bookidChangeHandler}
-                      placeholder="isbn"
+                      placeholder="ISBN (Example: 9786160451692)"
                     />
                   </div>
                   <br></br>
@@ -130,7 +130,7 @@ const AddFrom = () => {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={authorChangeHandler}
-                      placeholder="Author"
+                      placeholder="Author (Example: Paulo Coelho)"
                     />
                   </div>
                   <br></br>
@@ -156,7 +156,7 @@ const AddFrom = () => {
                       type="number"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={pagesChangeHandler}
-                      placeholder="Pages"
+                      placeholder="Pages (Example : 160)"
                     />
                   </div>
                   <br></br>
@@ -168,7 +168,7 @@ const AddFrom = () => {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={publishChangeHandler}
-                      placeholder="Publish"
+                      placeholder="Publish (Example: NANMEE BOOKS)"
                     />
                   </div>
                   <br></br>

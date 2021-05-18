@@ -51,7 +51,7 @@ const EditUserDetails = (props) => {
     if (updateStatus === "completed") {
       history.push(`/profile/${loadedProfile.username}`);
     }
-  }, [updateStatus, history, loadedProfile.username]);
+  }, [updateStatus, history]);
 
   const { value: enteredName, valueChangeHandler: nameChangeHandler } =
     useInput(() => {});

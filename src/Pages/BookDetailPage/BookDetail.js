@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import useHttp from "../../hooks/use-http";
@@ -9,11 +9,14 @@ import Detail from "./Components/Detail";
 
 import AddComment from "./Components/Comment/AddComment";
 import Comments from "./Components/Comment/Comments";
+import AuthContext from "../../store/auth-context";
 
 const BookDetail = (props) => {
   const params = useParams();
 
   const { bookId } = params;
+
+  const ctx = useContext(AuthContext);
 
   const {
     sendRequest,
@@ -89,9 +92,12 @@ const BookDetail = (props) => {
             className="container mx-auto px-4"
             style={{ width: "80%", marginBottom: "18rem" }}
           >
-            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg">
+            <div
+              className="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg"
+              style={{ marginBottom: "50rem" }}
+            >
               <Comments isbn={bookId} />
-              <AddComment isbn={bookId} />
+              {ctx.currentUser && <AddComment isbn={bookId} />}
             </div>
           </div>
         </section>

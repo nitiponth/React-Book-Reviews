@@ -9,7 +9,7 @@ const EditBook = () => {
   const history = useHistory();
 
   if (ctx.currentUser !== "admin") {
-    console.log("get out!");
+    history.push("/");
   }
 
   return (
